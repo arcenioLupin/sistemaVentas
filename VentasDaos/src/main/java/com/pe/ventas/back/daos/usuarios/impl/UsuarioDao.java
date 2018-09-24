@@ -18,6 +18,7 @@ import com.pe.ventas.back.dtos.daos.sql.usuarios.UsuarioSqlDto;
 import com.pe.ventas.back.dtos.daos.usuarios.UsuarioDaoDto;
 import com.pe.ventas.back.utilidades.mapeos.usuarios.UsuarioDtoMaper;
 
+
 @Repository("usuarioDao")
 public class UsuarioDao implements IUsuarioDao {
 

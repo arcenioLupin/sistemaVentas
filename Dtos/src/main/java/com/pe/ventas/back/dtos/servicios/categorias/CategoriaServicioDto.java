@@ -15,6 +15,7 @@ public class CategoriaServicioDto implements Serializable {
 
 	private static final long serialVersionUID = -7481172203102337953L;
 	
+	private Integer codigo;
 	private String  categoriaNombre;
 	private String  categoriaDescripcion;
 	private String  categoriaEstado;

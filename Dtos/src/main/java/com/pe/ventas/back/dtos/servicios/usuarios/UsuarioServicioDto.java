@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 public class UsuarioServicioDto implements Serializable {
 
     private static final long serialVersionUID = 3295452824284665006L;
-
+    
+    private Integer identificador;
     private String alias;
     private String correo;
     private String contrasenya;

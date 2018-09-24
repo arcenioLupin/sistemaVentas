@@ -6,6 +6,7 @@ import static spark.Spark.halt;
 import static spark.Spark.path;
 import static spark.Spark.post;
 import static spark.Spark.put;
+import static spark.Spark.delete;
 
 import java.util.List;
 
@@ -20,16 +21,15 @@ import com.pe.ventas.back.dtos.base.JsonDto;
 import com.pe.ventas.back.dtos.rest.ResultResponse;
 import com.pe.ventas.back.dtos.rest.usuarios.UsuarioRestDto;
 import com.pe.ventas.back.dtos.servicios.usuarios.UsuarioServicioDto;
-import com.pe.ventas.back.rest.usuarios.IUsuarioRest;
+import com.pe.ventas.back.rest.usuarios.IVentaRest;
 import com.pe.ventas.back.servicios.usuarios.IUsuarioServicio;
-import com.pe.ventas.back.servicios.usuarios.impl.UsuarioServicio;
 import com.pe.ventas.back.utilidades.mapeos.usuarios.UsuarioDtoMaper;
 
 import spark.Request;
 import spark.Response;
 
 @Component("usuarioRest")
-public class UsuarioRest implements IUsuarioRest {
+public class UsuarioRest implements IVentaRest {
 
     private static final Logger LOG = LogManager.getLogger(UsuarioRest.class);
 
@@ -45,7 +45,10 @@ public class UsuarioRest implements IUsuarioRest {
                         (request, response) -> new ResultResponse.Builder().code(200).message("Funcionando").build());
                 post("/usuarios/autenticar", CONTENT_TYPE, (request, response) -> autenticacion(request, response));
                 get("/usuarios", CONTENT_TYPE, (request, response) -> todosLosUsuarios(request, response));
+                get("/usuarios/usuario/:id", CONTENT_TYPE, (request, response) -> obtenerUnUsuario(request, response));
                 put("/usuarios", CONTENT_TYPE, (request, response) -> insertarUsuario(request, response));
+                put("/usuarios/actualizar", CONTENT_TYPE, (request, response) -> actualizarUsuario(request, response));
+                delete("/usuarios/delete/:id", CONTENT_TYPE, (request, response) -> eliminarUsuario(request, response));
                 get("/usuarios/clear", CONTENT_TYPE, (request, response) -> limpiarCache(request, response));
             });
         });
@@ -119,4 +122,64 @@ public class UsuarioRest implements IUsuarioRest {
     	 return new ResultResponse.Builder().code(500).message("Fallo al insertar el usuario").build();
     	
     }
+    
+    private ResultResponse actualizarUsuario(final Request request, final Response response) {
+   	 validarContentType(request,response);
+   	 final UsuarioRestDto usuario = JsonDto.aJson(request.body(),UsuarioRestDto.class);
+   	 final UsuarioServicioDto usuarioServicioDto = UsuarioDtoMaper.INSTANCE.usuarioRestDtoAUsuarioServicioDto(usuario);
+   	 final Boolean isUsuarioActualizado = usuarioServicio.actualizar(usuarioServicioDto);
+   	 
+   	 response.type(CONTENT_TYPE);
+   	 if(isUsuarioActualizado) {
+   		 
+   		 return new ResultResponse.Builder().build();
+   	 }
+   	 
+   	 response.status(500);
+   	 return new ResultResponse.Builder().code(500).message("Fallo al actualizar el usuario").build();
+   	
+   }    
+    
+  private ResultResponse eliminarUsuario(final Request request, final Response response) {
+      	 validarContentType(request,response);
+      	 //final UsuarioRestDto usuario = JsonDto.aJson(request.body(),UsuarioRestDto.class);
+      	 String id = request.params(":id");
+      	 //final UsuarioServicioDto usuarioServicioDto = UsuarioDtoMaper.INSTANCE.usuarioRestDtoAUsuarioServicioDto(usuario);
+      	 UsuarioServicioDto usuarioServicioDto = new UsuarioServicioDto();
+      	usuarioServicioDto.setIdentificador(Integer.parseInt(id));
+      	 final Boolean isUsuarioEliminado = usuarioServicio.eliminar(usuarioServicioDto);
+      	 
+      	 response.type(CONTENT_TYPE);
+      	 if(isUsuarioEliminado) {
+      		 
+      		 return new ResultResponse.Builder().build();
+      	 }
+      	 
+      	 response.status(500);
+      	 return new ResultResponse.Builder().code(500).message("Fallo al eliminar el usuario").build();
+      	
+      }
+  
+  private ResultResponse obtenerUnUsuario(final Request request, final Response response) {
+  	LOG.info("entro a obtenerUnaUsuario()");
+      validarContentType(request, response);
+      
+      String id = request.params(":id");
+  	//CategoriaServicioDto categoriaServicioDto = CategoriaDtoMaper.INSTANCE.categoriaRestDtoAcategoriaServicioDto(categoria);
+      UsuarioServicioDto usuarioServicioDto = new UsuarioServicioDto();
+      usuarioServicioDto.setIdentificador(Integer.parseInt(id));
+      usuarioServicioDto = usuarioServicio.obtenerUnUsuario(usuarioServicioDto);
+	   	 
+	   	 response.type(CONTENT_TYPE);
+	   	 if(usuarioServicioDto != null) {
+	   		 
+	   	  return new ResultResponse.Builder()
+                  .object(UsuarioDtoMaper.INSTANCE.usuarioServicioDtoAUsuarioRestDto(usuarioServicioDto))
+                  .build();
+	   	 }
+	   	 
+	   	 response.status(500);
+	   	 return new ResultResponse.Builder().code(500).message("Fallo al obtener el usuario").build();
+
+ }
 }

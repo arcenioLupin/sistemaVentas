@@ -24,14 +24,21 @@ public interface UsuarioDtoMaper {
     @InheritInverseConfiguration
     UsuarioSqlDto usuarioDaoDtoAUsuarioSqlDto(UsuarioDaoDto usuario);
 
-    UsuarioServicioDto usuarioDaoDtoAUsuarioServicioDto(UsuarioDaoDto usuario);
+    
 
+  
     UsuarioDaoDto usuarioServicioDtoAUsuarioDaoDto(UsuarioServicioDto usuario);
-
+    
+    UsuarioServicioDto usuarioDaoDtoAUsuarioServicioDto(UsuarioDaoDto usuario);
+    
+    @Mappings({ @Mapping(source = "id", target = "identificador") })
+    UsuarioServicioDto usuarioRestDtoAUsuarioServicioDto(UsuarioRestDto usuario);
+    
+    @InheritInverseConfiguration
     @Mapping(target = "contrasenya", ignore = true)
     UsuarioRestDto usuarioServicioDtoAUsuarioRestDto(UsuarioServicioDto usuario);
 
-    UsuarioServicioDto usuarioRestDtoAUsuarioServicioDto(UsuarioRestDto usuario);
+   
 
     List<UsuarioRestDto> convertirListaUsuarioServicioDtoAUsuarioRestDto(List<UsuarioServicioDto> usuario);
 

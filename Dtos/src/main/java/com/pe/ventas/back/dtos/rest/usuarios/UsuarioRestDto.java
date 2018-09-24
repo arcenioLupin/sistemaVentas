@@ -13,6 +13,7 @@ public class UsuarioRestDto implements Serializable {
 
     private static final long serialVersionUID = 605689904521722810L;
 
+    private Integer id;
     private String alias;
     private String correo;
     private String contrasenya;

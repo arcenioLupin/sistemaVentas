@@ -17,6 +17,7 @@ public class CategoriaRestDto  implements Serializable{
 
 	private static final long serialVersionUID = -4720449775869202817L;
 	
+	private Integer categoriaCodigo;
 	private String  categoriaNombre;
 	private String  categoriaDescripcion;
 	private String  categoriaEstado;

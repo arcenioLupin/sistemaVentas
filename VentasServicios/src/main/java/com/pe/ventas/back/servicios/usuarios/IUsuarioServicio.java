@@ -10,11 +10,14 @@ public interface IUsuarioServicio {
 
     Boolean actualizar(UsuarioServicioDto usuario);
     
+    Boolean eliminar(UsuarioServicioDto usuario);
+    
     Boolean insertarUsuario(final UsuarioServicioDto usuario);
     
     List<UsuarioServicioDto> todosLosUsuarios();
     
-
+    UsuarioServicioDto obtenerUnUsuario(UsuarioServicioDto usuario);
+    
     void limpiarCache();
 
 }

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pe.ventas.back.daos.usuarios.IUsuarioDao;
-import com.pe.ventas.back.daos.usuarios.impl.UsuarioDao;
 import com.pe.ventas.back.dtos.daos.usuarios.UsuarioDaoDto;
 import com.pe.ventas.back.dtos.servicios.usuarios.UsuarioServicioDto;
 import com.pe.ventas.back.servicios.usuarios.IUsuarioServicio;
@@ -89,5 +88,22 @@ public class UsuarioServicio implements IUsuarioServicio {
     public void limpiarCache() {
         usuarioDao.limpiarCache();
     }
+
+	@Override
+	public Boolean eliminar(UsuarioServicioDto usuario) {
+		LOG.debug("Eliminar usuario: "+usuario);
+    	UsuarioDaoDto usuarioDaoDto = UsuarioDtoMaper.INSTANCE.usuarioServicioDtoAUsuarioDaoDto(usuario);   	
+    	return  usuarioDao.eliminar(usuarioDaoDto);
+    	
+	}
+	
+
+	@Override
+	public UsuarioServicioDto obtenerUnUsuario(UsuarioServicioDto usuario) {
+		UsuarioDaoDto usuarioDaoDto = UsuarioDtoMaper.INSTANCE.usuarioServicioDtoAUsuarioDaoDto(usuario); 
+		usuarioDaoDto = usuarioDao.obtenerUnUsuario(usuarioDaoDto);
+		UsuarioServicioDto usuarioServicioDto = UsuarioDtoMaper.INSTANCE.usuarioDaoDtoAUsuarioServicioDto(usuarioDaoDto);
+		return usuarioServicioDto;
+	}
 
 }
