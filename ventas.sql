@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version 5.1.39-community)
-# Date: 2018-07-23 22:51:19
+# Date: 2018-09-24 10:11:13
 # Generator: MySQL-Front 6.0  (Build 2.20)
 
 
@@ -48,13 +48,13 @@ CREATE TABLE `categorias` (
   `CategoriaHomod` time DEFAULT NULL COMMENT 'Hora de Modificación',
   `CategoriaUsmod` varchar(12) DEFAULT NULL COMMENT 'Usuario de Modificación',
   PRIMARY KEY (`CategoriaCodigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "categorias"
 #
 
-INSERT INTO `categorias` VALUES (1,'AUDIFONOS','CATEGORIA QUE AGRUPA DIVERSAS MARCAS Y TIPOS DE AUDIFONOS\n','A','2018-07-22','07:39:00','ALUPIN',NULL,NULL,NULL),(2,'PARLANTES','AGRUPA DIVERSOS TIPOS Y MARCAS DE PARLANTES\n','A','2018-07-22','07:43:00','ALUPIN',NULL,NULL,NULL),(3,'RELOJES','AGRUPA A DIVERSOS TIPOS Y MARCAS DE RELOJES\n','A','2018-07-22','07:44:00','ALUPIN',NULL,NULL,NULL);
+INSERT INTO `categorias` VALUES (5,'RELOJES','CATEGORIA QUE AGRUPA RELOJES','A','2018-08-23',NULL,NULL,NULL,NULL,NULL),(6,'AUDIFONOS','CATEGORIA QUE AGRUPA AUDIFONOS','A','2018-08-23',NULL,NULL,NULL,NULL,NULL),(7,'PARLANTES','CATEGORIA QUE AGRUPA PARLANTES','A','2018-08-23',NULL,NULL,NULL,NULL,NULL),(8,'PRUEBA','CATEGORIA QUE AGRUPA PRUEBA','A','2018-08-23',NULL,NULL,NULL,NULL,NULL),(10,'SMARTPHONES','CATEGORIA QUE AGRUPA SMARTPHONES','A','2018-08-26',NULL,NULL,NULL,NULL,NULL);
 
 #
 # Structure for table "monedas"
@@ -72,6 +72,7 @@ CREATE TABLE `monedas` (
 # Data for table "monedas"
 #
 
+INSERT INTO `monedas` VALUES ('D','$','DOLARES'),('S','S/.','SOLES');
 
 #
 # Structure for table "movimientos"
@@ -117,12 +118,13 @@ CREATE TABLE `tiposalmacen` (
   `TipoAlmacenHomod` time DEFAULT NULL COMMENT 'Hora de Modificación',
   `TipoAlmacenUsmod` varchar(12) DEFAULT NULL COMMENT 'Usuario de Modificación',
   PRIMARY KEY (`TipoAlmacenCodigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "tiposalmacen"
 #
 
+INSERT INTO `tiposalmacen` VALUES (5,'ALMACEN A','ALMACEN ELECTRONICOS','A','2018-09-20',NULL,NULL,NULL,NULL,NULL),(6,'ALMACEN B','ALMACEN REPUESTOS MOTOS','A','2018-09-20',NULL,NULL,NULL,NULL,NULL),(7,'ALMACEN C','ALMACEN ROPA','A','2018-09-20',NULL,NULL,NULL,NULL,NULL),(8,'ALMACEN D','ALMACEN JUGUETES NIÃ‘OS','A','2018-09-20',NULL,NULL,NULL,NULL,NULL);
 
 #
 # Structure for table "almacenes"
@@ -168,6 +170,7 @@ CREATE TABLE `unidadesmedida` (
 # Data for table "unidadesmedida"
 #
 
+INSERT INTO `unidadesmedida` VALUES ('UMK','K','KILOGRAMO'),('UML','L','LITRO'),('UMM','M','METRO'),('UMU','U','UNIDADES');
 
 #
 # Structure for table "productos"
@@ -197,12 +200,13 @@ CREATE TABLE `productos` (
   CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`CategoriaCodigo`) REFERENCES `categorias` (`CategoriaCodigo`) ON UPDATE CASCADE,
   CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`MonedaCodigo`) REFERENCES `monedas` (`MonedaCodigo`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `productos_ibfk_3` FOREIGN KEY (`UnidadMedidaCodigo`) REFERENCES `unidadesmedida` (`UnidadMedidaCodigo`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "productos"
 #
 
+INSERT INTO `productos` VALUES (1,'AUDIFONOS URBEATS WIRELESS','AUDIFONOS URBEATS WIRELESS ,SONIDO ALTA CALIDAD',6,'UMU',255.50,'D','A','2018-09-14',NULL,NULL,NULL,NULL,NULL),(2,'AUDIFONOS TOUR BEATS WIRELESS','AUDIFONOS TOUR BEATS WIRELESS ,SONIDO ALTA CALIDAD',6,'UMU',753.50,'D','A','2018-09-14',NULL,NULL,NULL,NULL,NULL),(3,'RELOJ SPORT HOMBRE','RELOJ SPORT HOMBRE,CORREA DE CUERO',5,'UMU',53.50,'D','A','2018-09-14',NULL,NULL,NULL,NULL,NULL),(5,'PRODUCTO TEST','PRODUCTO TEST',5,'UMU',13.50,'D','A','2018-09-14',NULL,NULL,NULL,NULL,NULL);
 
 #
 # Structure for table "movimientoproducto"
@@ -240,14 +244,14 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `Usuarios_UN_ALIAS` (`alias`),
   UNIQUE KEY `Usuarios_UN_CORREO` (`correo`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "usuarios"
 #
 
-INSERT INTO `usuarios` VALUES (1,'arcenioLupin','arcenioLupin.dev@gmail.com','1bad8acb16c7a75b281d86cea1993a2e',NULL,'2018-07-21 22:18:18',NULL),(2,'arce','arce.dev@gmail.com','fc5e4620066dcb6e9f5081d2ee9ce4b6',NULL,NULL,NULL),(18,'test33695','test62760@r.com','369fdaa2741244f57b484d8ac1828fd3',NULL,'2018-07-19 01:06:22','2018-07-19 01:06:22'),(20,'test47723','test47723@r.com','6bec3e778994bf422cdff4cc8ee341a2',NULL,'2018-07-19 01:06:23','2018-07-19 01:06:23'),(21,'test15051','test15051@r.com','206f6a7ada917912e9389da75d80be3b',NULL,'2018-07-19 01:06:23','2018-07-19 01:06:23'),(22,'test45957','test76214@r.com','0566a85f6665677610d6af3482ea8dc4',NULL,'2018-07-19 01:14:31','2018-07-19 01:14:31'),(24,'test42228','test42228@r.com','3039a72740ccf74a6c840aacbef79b0b',NULL,'2018-07-19 01:14:31','2018-07-19 01:14:31'),(25,'test33961','test33961@r.com','cc1293b4eae66aa4fa2960e6ccb8ae96',NULL,'2018-07-19 01:14:31','2018-07-19 01:14:31'),(26,'akim','akimvilca.caceres@gmail.com','6d14ff7e8dc341f3c29b14e5cc5ec06a',NULL,'2018-07-21 23:45:08',NULL);
-INSERT INTO `usuarios` (alias,correo,contrasenya) VALUES('rafexone2','rafex2.dev@gmail.com',MD5('rulo322'));
+INSERT INTO `usuarios` VALUES (1,'arcenioLupin','arcenioLupin.dev@gmail.com','1bad8acb16c7a75b281d86cea1993a2e',NULL,'2018-09-14 13:48:54',NULL),(2,'arcenio','arcenio.dev@gmail.com','fc5e4620066dcb6e9f5081d2ee9ce4b6',NULL,NULL,'2018-08-15 00:06:59'),(18,'test33695','test62760@r.com','369fdaa2741244f57b484d8ac1828fd3',NULL,'2018-07-19 01:06:22','2018-07-19 01:06:22'),(21,'test15051','test15051@r.com','206f6a7ada917912e9389da75d80be3b',NULL,'2018-07-19 01:06:23','2018-07-19 01:06:23'),(22,'test45957','test76214@r.com','0566a85f6665677610d6af3482ea8dc4',NULL,'2018-07-19 01:14:31','2018-07-19 01:14:31'),(24,'test42228','test42228@r.com','3039a72740ccf74a6c840aacbef79b0b',NULL,'2018-07-19 01:14:31','2018-07-19 01:14:31'),(25,'test33961','test33961@r.com','cc1293b4eae66aa4fa2960e6ccb8ae96',NULL,'2018-07-19 01:14:31','2018-07-19 01:14:31'),(26,'akim','akimvilca.caceres@gmail.com','6d14ff7e8dc341f3c29b14e5cc5ec06a',NULL,'2018-07-21 23:45:08',NULL),(27,'rafexone2','rafex2.dev@gmail.com','79f87f817fdfed82e5d21800b7189f18',NULL,NULL,NULL),(28,'diego','diegovilca.saboya@gmail.com','b0ac23d94dcef21e36e457b4abf6e0cb',NULL,NULL,NULL);
+
 #
 # Structure for table "vendedores"
 #
