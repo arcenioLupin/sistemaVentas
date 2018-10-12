@@ -33,7 +33,8 @@ public class VentaApp implements SparkApplication {
         final IVentaRest unidadMedidaRest = (IVentaRest) context.getBean("unidadMedidaRest");
         final IVentaRest productoRest = (IVentaRest) context.getBean("productoRest");
         final IVentaRest tipoAlmacenRest = (IVentaRest) context.getBean("tipoAlmacenRest");
-
+        final IVentaRest almacenRest = (IVentaRest) context.getBean("almacenRest");
+        final IVentaRest vendedorRest = (IVentaRest) context.getBean("vendedorRest");
         enableCORS("*", "*", "*");
         beforeServer();
         get("/hello", (request, response) -> new ResultResponse.Builder().code(200)
@@ -45,6 +46,8 @@ public class VentaApp implements SparkApplication {
         unidadMedidaRest.routers();
         productoRest.routers();
         tipoAlmacenRest.routers();
+        almacenRest.routers();
+        vendedorRest.routers();
         afterServer();
 
     }

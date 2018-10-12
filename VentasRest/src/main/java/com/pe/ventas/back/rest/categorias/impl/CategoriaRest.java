@@ -105,7 +105,7 @@ public class CategoriaRest implements IVentaRest {
 	    	 }
 	    	 
 	    	 response.status(500);
-	    	 return new ResultResponse.Builder().code(500).message("Fallo al insertar el usuario").build();
+	    	 return new ResultResponse.Builder().code(500).message("Fallo al insertar la categoria").build();
 	    	
 	    }
 	    

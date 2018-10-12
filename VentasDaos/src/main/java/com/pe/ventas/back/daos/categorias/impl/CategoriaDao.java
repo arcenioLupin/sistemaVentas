@@ -76,7 +76,7 @@ public class CategoriaDao implements ICategoriaDao {
     @CacheEvict(value = "categorias", key = "#categoria.codigo")
     @Transactional
 	public Boolean eliminaCategoria(CategoriaDaoDto categoria) {
-		LOG.debug("Obteniendo obj CategoriaDaoDto en actualizarCategoria: "+categoria);
+		LOG.debug("Obteniendo obj CategoriaDaoDto en eliminaCategoria: "+categoria);
 		CategoriaSqlDto categoriaSqlDto = CategoriaDtoMaper.INSTANCE.categoriaDaoDtoAcategoriaSqlDto(categoria);
 		final Integer resultado = categoriaSqlMaper.delete(categoriaSqlDto);
 		return  (resultado !=null) && (resultado >0) ? true :false;
