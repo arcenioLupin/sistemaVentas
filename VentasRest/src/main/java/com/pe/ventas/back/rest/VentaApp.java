@@ -35,6 +35,11 @@ public class VentaApp implements SparkApplication {
         final IVentaRest tipoAlmacenRest = (IVentaRest) context.getBean("tipoAlmacenRest");
         final IVentaRest almacenRest = (IVentaRest) context.getBean("almacenRest");
         final IVentaRest vendedorRest = (IVentaRest) context.getBean("vendedorRest");
+        final IVentaRest movimientoRest = (IVentaRest) context.getBean("movimientoRest");
+        final IVentaRest almacenProductoRest = (IVentaRest) context.getBean("almacenProductoRest");
+        final IVentaRest almacenVendedorRest = (IVentaRest) context.getBean("almacenVendedorRest");
+        final IVentaRest movimientoProductoRest = (IVentaRest) context.getBean("movimientoProductoRest");
+        final IVentaRest ventaRest = (IVentaRest) context.getBean("ventaRest");
         enableCORS("*", "*", "*");
         beforeServer();
         get("/hello", (request, response) -> new ResultResponse.Builder().code(200)
@@ -48,6 +53,11 @@ public class VentaApp implements SparkApplication {
         tipoAlmacenRest.routers();
         almacenRest.routers();
         vendedorRest.routers();
+        movimientoRest.routers();
+        almacenProductoRest.routers();
+        almacenVendedorRest.routers();
+        movimientoProductoRest.routers();
+        ventaRest.routers();
         afterServer();
 
     }

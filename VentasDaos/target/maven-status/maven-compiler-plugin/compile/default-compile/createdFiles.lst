@@ -1,0 +1,5 @@
+com\pe\ventas\back\daos\sql\mapeos\categorias\CategoriaSqlMaper.class
+com\pe\ventas\back\daos\usuarios\IUsuarioDao.class
+com\pe\ventas\back\daos\sql\mapeos\usuarios\UsuarioSqlMaper.class
+com\pe\ventas\back\daos\usuarios\impl\UsuarioDao.class
+com\pe\ventas\back\daos\sql\mapeos\usuarios\UsuarioConsultas.class
